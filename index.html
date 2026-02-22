@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAVID TRANS - Autoprevoznik | Gradiška</title>
+    <meta name="description" content="Samostalni preduzetnik autoprevoznik DAVID TRANS, David Plisnić s.p. Gradiška - profesionalni transportne usluge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS Variables */
+        :root {
+            --primary-blue: #0066cc;
+            --secondary-blue: #004499;
+            --dark-gray: #2d3748;
+            --medium-gray: #718096;
+            --light-gray: #e2e8f0;
+            --success-green: #48bb78;
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Header/Navigation */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        /* Stats counter */
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        /* Social Icons */
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: white !important;
+        }
+
+        /* Gallery hover effect */
+        .gallery-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        /* Form focus */
+        .form-input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <i class="fas fa-truck-moving text-3xl text-blue-600"></i>
+                    <span class="font-bold text-2xl text-gray-800">DAVID TRANS</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Početna</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Usluge</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-blue-600 font-medium">O nama</a>
+                    <a href="#gallery" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Galerija</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Kontakt</a>
+                    <a href="tel:+38765084719" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-phone mr-2"></i>065 084 719
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">Početna</a>
+                <a href="#services" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">Usluge</a>
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">O nama</a>
+                <a href="#gallery" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">Galerija</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-700 hover:bg-blue-50 rounded-md">Kontakt</a>
+                <a href="tel:+38765084719" class="block mx-3 mt-4 text-center bg-blue-600 text-white px-6 py-3 rounded-full">
+                    <i class="fas fa-phone mr-2"></i>Pozovite: 065 084 719
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero min-h-screen flex items-center justify-center pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-8">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-4">
+                    <span class="inline-block animate-bounce">DAVID</span>
+                    <span class="inline-block animate-pulse ml-2">TRANS</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-10">
+                    Profesionalni autoprevoznik sa višegodišnjim iskustvom u međunarodnom i nacionalnom transportu
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#contact" class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-all transform hover:-translate-y-1 shadow-lg">
+                        <i class="fas fa-file-invoice mr-2"></i>Zatražite Ponudu
+                    </a>
+                    <a href="tel:+38765084719" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all">
+                        <i class="fas fa-phone mr-2"></i>Pozovite: 065 084 719
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Naše <span class="text-blue-600">Usluge</span></h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Kompletan spektar transportnih usluga za privatne i biznis klijente</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-globe-europe text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Međunarodni Transport</h3>
+                    <p class="text-gray-600 mb-6">Bezbedan i pouzdan transport putnika preko svih evropskih granica sa profesionalnim vozačima i modernim vozilima.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Sve evropske destinacije</span>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>24/7 podrška</span>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Poređenjivi ceni</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 text-2xl font-bold text-blue-600">Početak od €100</div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-city text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Lokalni Prevoz</h3>
+                    <p class="text-gray-600 mb-6">Efikasni transport unutar Bosne i Hercegovine sa optimalnim rutama i tačnim vremenom dolaska.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Svi gradovi BiH</span>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Tačnost garantovano</span>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Prihvatljivi ceni</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 text-2xl font-bold text-blue-600">Početak od KM 50</div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-crown text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Rent a Car</h3>
+                    <p class="text-gray-600 mb-6">Iznajmljivanje premium vozila sa profesionalnim vozačem za specijalne prilike, biznis putnike i posebne zahteve.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Luksuzna vozila</span>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Profesionalni vozači</span>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Bezbednost garantovana</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 text-2xl font-bold text-blue-600">Početak od KM 150</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Naša <span class="text-blue-600">Flota</span></h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Moderna i održavana vozila za svaku priliku</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Gallery Item 1 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://picsum.photos/seed/van1/600/400.jpg" alt="Premium van" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-white">
+                            <h3 class="text-2xl font-bold mb-2">Premium Van</h3>
+                            <p class="text-blue-100">8 sedišta, klima, Wi-Fi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://picsum.photos/seed/van2/600/400.jpg" alt="Business van" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-white">
+                            <h3 class="text-2xl font-bold mb-2">Business Van</h3>
+                            <p class="text-blue-100">6 sedišta, kožna sedišta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://picsum.photos/seed/bus1/600/400.jpg" alt="Mini bus" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-white">
+                            <h3 class="text-2xl font-bold mb-2">Mini Bus</h3>
+                            <p class="text-blue-100">20 sedišta, WC, TV</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://picsum.photos/seed/bus2/600/400.jpg" alt="Standard bus" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-white">
+                            <h3 class="text-2xl font-bold mb-2">Standard Bus</h3>
+                            <p class="text-blue-100">40 sedišta, klima</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://picsum.photos/seed/truck4/600/400.jpg" alt="Long distance" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-white">
+                            <h3 class="text-2xl font-bold mb-2">Long Distance</h3>
+                            <p class="text-blue-100">Premium udobnost</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://picsum.photos/seed/truck5/600/400.jpg" alt="VIP transport" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="text-white">
+                            <h3 class="text-2xl font-bold mb-2">VIP Transport</h3>
+                            <p class="text-blue-100">Luxury service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6">O <span class="text-blue-600">Kompaniji</span> DAVID TRANS</h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                        DAVID TRANS je profesionalna kompanija za autoprevoz osnovana 2025. godine sa sedištem u Gradiški. Naša misija je pružanje pouzdanih i sigurnih transportnih usluga sa fokusom na korisničku uslugu i profesionalizam.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
+                            <div class="w-14 h-14 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-shield-alt text-2xl text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Sigurnost Prva</h4>
+                                <p class="text-gray-600">Sva vozila redovno servisirana i ispunjavaju svjetske standarde bezbjednosti.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
+                            <div class="w-14 h-14 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-clock text-2xl text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Tačnost</h4>
+                                <p class="text-gray-600">Stižemo tačno na vrijeme, svaki put. Naša reputacija je naša garancija.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
+                            <div class="w-14 h-14 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-users text-2xl text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Profesionalni Vozači</h4>
+                                <p class="text-gray-600">Iskustveni i učtivi vozači sa višegodišnjim iskustvom u transportu.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl shadow-md flex items-start">
+                            <div class="w-14 h-14 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-dollar-sign text-2xl text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Poređenjive Cijene</h4>
+                                <p class="text-gray-600">Kvalitetan servis po transparentnim i kompetitivnim cijenama.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="text-gray-600 font-semibold mt-2">Godina Iskustva</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="text-gray-600 font-semibold mt-2">Vozila Flote</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                        <div class="stat-number" data-target="1000">0</div>
+                        <div class="text-gray-600 font-semibold mt-2">Zadovoljnih Klijenata</div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                        <div class="stat-number" data-target="24">0</div>
+                        <div class="text-gray-600 font-semibold mt-2">Radnih Sati Danju</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Kontaktirajte <span class="text-blue-600">Nas</span></h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Vaša zadovoljstva je naš prioritet. Kontaktirajte nas za besplatnu ponudu ili informacije o našim uslugama.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="flex items-start">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Lokacija</h3>
+                            <p class="text-gray-600">Miloša Crnjanskog 12, 78418 NOVA TOPOLA, BiH</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
+                            <i class="fas fa-phone text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Telefon</h3>
+                            <p class="text-gray-600 text-2xl font-bold text-blue-600">065 084 719</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
+                            <i class="fas fa-envelope text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Email</h3>
+                            <p class="text-gray-600">[email]</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mr-6 flex-shrink-0">
+                            <i class="fas fa-clock text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Radno Vrijeme</h3>
+                            <p class="text-gray-600">Pon-Pet: 08:00-20:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6">Pošaljite Nam <span class="text-blue-600">Poruku</span></h3>
+                    <form id="contactForm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2" for="name">Ime i Prezime *</label>
+                                <input type="text" id="name" name="name" required class="w-full p-4 rounded-lg border border-gray-300 form-input">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2" for="email">Email Adresa *</label>
+                                <input type="email" id="email" name="email" required class="w-full p-4 rounded-lg border border-gray-300 form-input">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2" for="phone">Broj Telefona</label>
+                                <input type="tel" id="phone" name="phone" class="w-full p-4 rounded-lg border border-gray-300 form-input">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2" for="company">Kompanija</label>
+                                <input type="text" id="company" name="company" class="w-full p-4 rounded-lg border border-gray-300 form-input">
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="block text-gray-700 font-semibold mb-2" for="instagram">Instagram</label>
+                            <input type="text" id="instagram" name="instagram" placeholder="npr. @davidtrans" class="w-full p-4 rounded-lg border border-gray-300 form-input">
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="block text-gray-700 font-semibold mb-2" for="facebook">Facebook</label>
+                            <input type="text" id="facebook" name="facebook" placeholder="npr. /davidtrans" class="w-full p-4 rounded-lg border border-gray-300 form-input">
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="block text-gray-700 font-semibold mb-2" for="service">Tip Usluge</label>
+                            <select id="service" name="service" class="w-full p-4 rounded-lg border border-gray-300 form-input bg-white">
+                                <option value="">- Izaberite Uslugu -</option>
+                                <option value="international">Međunarodni Transport</option>
+                                <option value="local">Lokalni Prevoz</option>
+                                <option value="rent">Rent a Car</option>
+                                <option value="other">Ostalo</option>
+                            </select>
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="block text-gray-700 font-semibold mb-2" for="message">Poruka</label>
+                            <textarea id="message" name="message" rows="4" class="w-full p-4 rounded-lg border border-gray-300 form-input"></textarea>
+                        </div>
+
+                        <div class="mt-8">
+                            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-4 px-6 rounded-full hover:from-blue-700 hover:to-blue-900 transition-all transform hover:-translate-y-1 shadow-lg">
+                                <i class="fas fa-paper-plane mr-2"></i>Pošalji Poruku
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fas fa-truck-moving text-3xl text-blue-500"></i>
+                        <span class="font-bold text-2xl">DAVID TRANS</span>
+                    </div>
+                    <p class="text-gray-400">Profesionalni autoprevoznik sa fokusom na kvalitet, sigurnost i zadovoljstvo klijenata.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Brzi Linkovi</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2"></i>Naše Usluge</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2"></i>Galerija Vozila</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2"></i>O Kompaniji</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2"></i>Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Kontakt Informacije</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-blue-500"></i>
+                            <a href="tel:+38765084719" class="text-gray-400 hover:text-white transition-colors">065 084 719</a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-blue-500"></i>
+                            <a href="mailto:[email]" class="text-gray-400 hover:text-white transition-colors">[email]</a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-500"></i>
+                            <span class="text-gray-400">Miloša Crnjanskog 12, 78418 NOVA TOPOLA, BiH</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock mt-1 mr-3 text-blue-500"></i>
+                            <span class="text-gray-400">Pon-Pet: 08:00-20:00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Pratite Nas</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-14 h-14 bg-gray-800 rounded-full flex items-center justify-center social-icon hover:bg-blue-600">
+                            <i class="fab fa-facebook-f text-2xl"></i>
+                        </a>
+                        <a href="#" class="w-14 h-14 bg-gray-800 rounded-full flex items-center justify-center social-icon hover:bg-blue-600">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="w-14 h-14 bg-gray-800 rounded-full flex items-center justify-center social-icon hover:bg-blue-600">
+                            <i class="fab fa-linkedin-in text-2xl"></i>
+                        </a>
+                    </div>
+                    <div class="mt-8">
+                        <p class="text-gray-400 mb-2">Osnovano</p>
+                        <p class="text-xl font-bold">8.3.2025.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 DAVID TRANS. Sva prava zadržana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / speed;
+
+                const updateCount = () => {
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCount, 10);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Intersection Observer for counter animation
+        const counterSection = document.querySelector('#about');
+        const counterObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounters();
+                counterObserver.unobserve(counterSection);
+            }
+        }, { threshold: 0.5 });
+        counterObserver.observe(counterSection);
+
+        // Form submission with validation
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Basic validation
+            if (!data.name || !data.email) {
+                showNotification('Molimo vas da popunite obavezna polja (ime i email)', 'error');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                showNotification('Molimo unesite ispravan email format', 'error');
+                return;
+            }
+
+            if (data.phone && !/^\d{8,15}$/.test(data.phone.replace(/\D/g, ''))) {
+                showNotification('Molimo unesite ispravan format broja telefona (8-15 cifara)', 'error');
+                return;
+            }
+
+            // Simulate form submission
+            console.log('Form submitted:', data);
+            showNotification('Hvala! Vaša poruka je uspješno poslata. Uskoro ćemo vas kontaktirati.', 'success');
+            this.reset();
+        });
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+
+            const notification = document.createElement('div');
+            notification.className = `notification fixed top-20 right-4 p-6 rounded-xl shadow-xl z-50 max-w-md transition-all duration-300 transform translate-x-0 ${type === 'error' ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <span class="text-2xl mr-4">${type === 'error' ? '⚠️' : '✅'}</span>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const navHeight = document.getElementById('navbar').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
